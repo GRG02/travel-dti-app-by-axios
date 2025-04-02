@@ -26,7 +26,7 @@ function AddMyTravel() {
 
   const handleAddTravelClick = async (e) => {
     e.preventDefault();
-  
+
     // Validate UI แล้วค่อยส่งข้อมูลไปให้ API
     if (travelPlace.trim().length === 0) {
       alert("ป้อนสถานที่ด้วย");
@@ -41,11 +41,11 @@ function AddMyTravel() {
       alert("ป้อนค่าเดินทางด้วย");
       return;
     }
-  
+
     // ดึง travellerId จาก localStorage
     const travellerData = localStorage.getItem('traveller');
     let travellerId = '';
-      
+
     if (travellerData) {
       try {
         const traveller = JSON.parse(travellerData);
@@ -54,7 +54,7 @@ function AddMyTravel() {
         console.error('Error parsing traveller data from localStorage:', error);
       }
     }
-  
+
     // ส่งข้อมูลไปให้ API บันทึกลง DB โดยใช้ formData
     const formData = new FormData();
     formData.append("travellerId", travellerId);
@@ -62,13 +62,21 @@ function AddMyTravel() {
     formData.append("travelStartDate", travelStartDate);
     formData.append("travelEndDate", travelEndDate);
     formData.append("travelCostTotal", travelCostTotal);
-  
+
     if (travelImage) {
       formData.append("travelImage", travelImage);
     }
-  
+
     try {
-      const response = await axios.post('https://travel-service-server-by-prisma-ivory.vercel.app/travel/', formData);
+      const response = await axios.post(
+        "https://travel-service-server-by-prisma-ivory.vercel.app/travel/",
+        formData, // ส่ง formData เป็นพารามิเตอร์แรก
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       if (response.status === 201) {
         alert('เพิ่มการเดินทางสำเร็จ...');
         window.location.href = '/mytravel';
@@ -80,7 +88,7 @@ function AddMyTravel() {
       alert('พบข้อผิดพลาด: ' + error);
     }
   };
-  
+
   useEffect(() => {
     const travelData = localStorage.getItem('travel');
     if (travelData) {
@@ -98,7 +106,7 @@ function AddMyTravel() {
       console.log('No travel data found in localStorage');
     }
   }, []);
-  
+
   return (
     <>
       <Box sx={{ width: '100%' }}>
@@ -120,19 +128,19 @@ function AddMyTravel() {
               <Button color="inherit">
                 {travellerFullname}
               </Button>
-              <Avatar src={travellerImage === '' ? Profile : 'http://localhost:3000/images/traveller/' + travellerImage} />
+              <Avatar src={travellerImage === '' ? Profile : `${travellerImage}`} />
               <Link to={'/'} style={{ color: 'red', textDecoration: 'none', marginLeft: '10px' }}>
                 LOG OUT
               </Link>
             </Toolbar>
           </AppBar>
         </Box>
-  
+
         <Box sx={{ width: '70%', boxShadow: 4, mx: 'auto', p: 5, my: 4 }}>
           <Typography variant='h4' component='div' sx={{ textAlign: 'center' }}>
             เพิ่มการเดินทาง
           </Typography>
-  
+
           <Avatar
             src={Travel}
             alt="travel logo"
@@ -170,7 +178,7 @@ function AddMyTravel() {
             value={travelCostTotal}
             onChange={(e) => setTravelCostTotal(e.target.value)}
           />
-  
+
           <Avatar
             src={
               travelImage && travelImage instanceof File
@@ -181,7 +189,7 @@ function AddMyTravel() {
             sx={{ width: 150, height: 150, mx: "auto", my: 3 }}
             variant="rounded"
           />
-  
+
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button
               component="label"
@@ -197,7 +205,7 @@ function AddMyTravel() {
               />
             </Button>
           </Box>
-  
+
           <Button
             variant="contained"
             fullWidth
@@ -206,7 +214,7 @@ function AddMyTravel() {
           >
             เพิ่มการเดินทาง
           </Button>
-  
+
           <Link to="/mytravel" style={{ textDecoration: "none", color: "#259e69" }}>
             <Typography
               sx={{ fontWeight: "bold", mt: 2, mb: 1, textAlign: "center" }}
