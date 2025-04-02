@@ -16,10 +16,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/edit-travel/:id" element={<EditMyTravel />} />
         <Route path="/mytravel" element={<MyTravel />} />
         <Route path="/addmytravel" element={<AddMyTravel />} />
-        <Route path="/editmytravel" element={<EditMyTravel />} />
+        <Route path="/editmytravel/:travelId" element={<EditMyTravel />} />
+        <Route path="/editprofile/:travellerId" element={<EditProfile />} />
       </Routes>
     </BrowserRouter>
     </>
