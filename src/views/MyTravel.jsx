@@ -43,7 +43,7 @@ function MyTravel() {
     const getAllTravel = async () => {
       try {
         const response = await axios.get(
-          `travel-service-server-by-prisma-ivory.vercel.app/travel/${travellerId}`
+          `https://travel-service-server-by-prisma-ivory.vercel.app/travel/${travellerId}`
         );
         console.log("API Data:", response.data); // เช็คข้อมูล API
         setTravel(response.data["data"]);
@@ -181,7 +181,7 @@ function MyTravel() {
                           if (confirmDelete) {
                             axios
                               .delete(
-                                `travel-service-server-by-prisma-ivory.vercel.app/travel/${row.travelId}`
+                                `https://travel-service-server-by-prisma-ivory.vercel.app/travel/${row.travelId}`
                               )
                               .then((response) => {
                                 if (response.status === 200) {
