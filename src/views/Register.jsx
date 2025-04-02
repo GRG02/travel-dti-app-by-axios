@@ -49,8 +49,16 @@ function Register() {
 
     // ส่งข้อมูลไปยัง API ด้วย axios
     try {
-      const response = await axios.post(`travel-service-server-by-prisma-ivory.vercel.app
-/traveller/`, formData);
+      const response = await axios.post(
+        "https://travel-service-server-by-prisma-ivory.vercel.app/traveller/",
+        formData, // ส่ง formData เป็นพารามิเตอร์แรก
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
       if (response.status === 201) {
         alert("ลงทะเบียนสำเร็จ...");
         navigate("/");
@@ -58,7 +66,7 @@ function Register() {
         alert("ลงทะเบียนไม่สำเร็จ กรุณาลองใหม่อีกครั้งนึง...");
       }
     } catch (error) {
-      alert("พบข้อผิดพลาด: " + error);
+      alert("พบข้อผิดพลาด: " + error.message);
     }
   };
 
