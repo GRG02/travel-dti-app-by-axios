@@ -32,7 +32,7 @@ function EditMyTravel() {
 
     const getTravel = async () => {
       try {
-        const response = await axios.get(`travel-service-server-by-prisma-ivory.vercel.app/travel/one/${travelId}`);
+        const response = await axios.get(`https://travel-service-server-by-prisma-ivory.vercel.app/travel/one/${travelId}`);
         const data = response.data;
         // สมมุติว่า API ส่งข้อมูลในรูปแบบ { data: { travelPlace, travelStartDate, travelEndDate, travelCostTotal } }
         setTravelPlace(data["data"].travelPlace);
@@ -89,7 +89,7 @@ function EditMyTravel() {
     }
 
     try {
-      const response = await axios.put(`travel-service-server-by-prisma-ivory.vercel.app/travel/${travelId}`, formData);
+      const response = await axios.put(`https://travel-service-server-by-prisma-ivory.vercel.app/travel/${travelId}`, formData);
       if (response.status === 200) {
         alert("แก้ไขสำเร็จ...");
         navigate("/mytravel");
