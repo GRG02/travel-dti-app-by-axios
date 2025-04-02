@@ -62,7 +62,7 @@ function EditProfile() {
     }
 
     try {
-      const response = await axios.put(`http://localhost:3000/traveller/editProfile/${travellerId}`, formData);
+      const response = await axios.put(`travel-service-server-by-prisma-ivory.vercel.app/traveller/editProfile/${travellerId}`, formData);
       if (response.status === 200) {
         alert("แก้ไขข้อมูลสำเร็จ...");
         navigate("/"); // Redirect to home or login page

@@ -68,7 +68,7 @@ function AddMyTravel() {
     }
   
     try {
-      const response = await axios.post('http://localhost:3000/travel/', formData);
+      const response = await axios.post('travel-service-server-by-prisma-ivory.vercel.app/travel/', formData);
       if (response.status === 201) {
         alert('เพิ่มการเดินทางสำเร็จ...');
         window.location.href = '/mytravel';

@@ -29,7 +29,7 @@ function Login() {
 
     //ส่งข้อมูลไปให้ API ลงฐานข้อมูลแล้วไปยังหน้า MyTravel
     try {
-      const response = await axios.get(`http://localhost:3000/traveller/${travellerEmail}/${travellerPassword}`)
+      const response = await axios.get(`travel-service-server-by-prisma-ivory.vercel.app/traveller/${travellerEmail}/${travellerPassword}`)
     
       if(response.status == 200) {
         alert('ลงชื่อเข้าใช้สำเร็จ...');

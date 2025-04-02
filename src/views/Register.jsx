@@ -49,7 +49,8 @@ function Register() {
 
     // ส่งข้อมูลไปยัง API ด้วย axios
     try {
-      const response = await axios.post("http://localhost:3000/traveller/", formData);
+      const response = await axios.post(`travel-service-server-by-prisma-ivory.vercel.app
+/traveller/`, formData);
       if (response.status === 201) {
         alert("ลงทะเบียนสำเร็จ...");
         navigate("/");
